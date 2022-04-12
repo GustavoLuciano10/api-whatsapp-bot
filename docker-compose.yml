@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  whatsapp-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: qs-wp-api
+    container_name: qs-wp-api
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
