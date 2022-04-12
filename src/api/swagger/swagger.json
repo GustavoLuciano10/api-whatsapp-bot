@@ -1,0 +1,141 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "description": "WhatsApp Bot API information",
+      "version": "1.0.0",
+      "title": "WhatsApp Bot API",
+      "termsOfService": "http://swagger.io/terms/",
+      "contact": {
+        "email": "gustavolucianodev@gmail.com"
+      }
+    },
+    "host": "localhost:3000",
+    "basePath": "",
+    "tags": [
+      {
+        "name": "message",
+        "description": "Details about send message whatsapp",
+        "externalDocs": {
+          "description": "Find out more",
+          "url": "http://swagger.io"
+        }
+      }
+    ],
+    "schemes": [
+      "http",
+      "https"
+    ],
+    "paths": {
+      "/sendText": {
+        "post": {
+          "tags": [
+            "message"
+          ],
+          "summary": "Send message text to whatsapp",
+          "description": "",
+          "operationId": "sendText",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Text message that will be triggered for whatsapp",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/TextMessage"
+              }
+            }
+          ],
+          "responses": {
+            "405": {
+              "description": "Invalid input"
+            }
+          },
+          "security": [
+            {
+              "petstore_auth": [
+                "write:messages",
+                "read:messages"
+              ]
+            }
+          ]
+        }
+      },
+      "/sendImage": {
+        "post": {
+          "tags": [
+            "message"
+          ],
+          "summary": "Send message image to whatsapp",
+          "description": "",
+          "operationId": "sendImage",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Text message image that will be triggered for whatsapp",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/ImageMessage"
+              }
+            }
+          ],
+          "responses": {
+            "405": {
+              "description": "Invalid input"
+            }
+          },
+          "security": [
+            {
+              "petstore_auth": [
+                "write:messages",
+                "read:messages"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "definitions": {
+      "TextMessage": {
+        "type": "object",
+        "properties": {
+          "remoteJid": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          }
+        }
+      },
+      "ImageMessage": {
+        "type": "object",
+        "properties": {
+          "remoteJid": {
+            "type": "string"
+          },
+          "caption": {
+            "type": "string"
+          },
+          "base64": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "externalDocs": {
+      "description": "Find out more about Swagger",
+      "url": "http://swagger.io"
+    }
+  }
