@@ -25,4 +25,4 @@ npm run dev
 3. Build project
 ```
 npm run build
-``
+```

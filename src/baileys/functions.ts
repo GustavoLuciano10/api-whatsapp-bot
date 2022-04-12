@@ -1,9 +1,5 @@
-import {
-    proto,
-  } from "@adiwajshing/baileys";
   import fs from "fs";
   import { general } from "./configurations/general";
-  import { IAntiLink } from "./interfaces/IAntiLink";
   import { IBotData } from "./interfaces/IBotData";
   import { IMessage } from "../api/models/IMessage";
   
@@ -22,12 +18,6 @@ import {
     };
   
     const sendImage = async (message: IMessage) => {
-      // if (isReply) {
-      //   options = {
-      //     quoted: webMessage,
-      //   };
-      // }
-  
       const image =
       message.pathOrBuffer instanceof Buffer
           ? message.pathOrBuffer
@@ -44,13 +34,6 @@ import {
     };
   
     const sendSticker = async (message: IMessage) => {
-  
-      // if (isReply) {
-      //   options = {
-      //     quoted: webMessage,
-      //   };
-      // }
-  
       const sticker =
       message.pathOrBuffer instanceof Buffer
           ? message.pathOrBuffer
@@ -61,13 +44,7 @@ import {
   
     const sendAudio = async (message: IMessage) => {
       let ptt = message.ptt;
-  
-      // if (isReply) {
-      //   options = {
-      //     quoted: webMessage,
-      //   };
-      // }
-  
+
       const audio =
       message.pathOrBuffer instanceof Buffer
           ? message.pathOrBuffer
@@ -98,27 +75,6 @@ import {
       );
     };
   
-    // const reply = async (message: IMessage) => {
-    //   return socket.sendMessage(
-    //     message.remoteJid,
-    //     { text: `${general.prefixEmoji} ${message.text}` },
-    //     { quoted: message }
-    //   );
-    // };
-  
-    // const {
-    //   messageText,
-    //   isImage,
-    //   isVideo,
-    //   isSticker,
-    //   isAudio,
-    //   isDocument,
-    //   userJid,
-    //   replyJid,
-    // } = extractDataFromWebMessage(webMessage);
-  
-    // const { command, args } = extractCommandAndArgs(messageText);
-  
     return {
       sendText,
       sendButtons,
@@ -137,60 +93,6 @@ import {
   export const writeJSON = (pathFile: string, data: any) => {
     fs.writeFileSync(pathFile, JSON.stringify(data));
   };
-  
-  // export const extractDataFromWebMessage = (message: IMessage) => {
-  //   let remoteJid: string;
-  //   let messageText: string | null | undefined;
-  
-  //   let isReply = false;
-  
-  //   let replyJid: string | null = null;
-  //   let replyText: string | null = null;
-  
-  //   const {
-  //     remoteJid: jid, participant: tempUserJid
-  //   } = message;
-  
-  //   if (jid) {
-  //     remoteJid = jid;
-  //   }
-
-  //   replyText = message.replyText;
-
-  //   replyText = message.replyJid;
-
-  //   messageText = message.text;
-  
-  //   const userJid = tempUserJid?.replace(/:[0-9][0-9]|:[0-9]/g, "");
-  
-  //   const isImage = message?.type === "image";
-  
-  //   const isVideo = message?.type === "video";
-  
-  //   const isAudio = message?.type === "audio";;
-  
-  //   const isSticker = message?.type === "stiker";;
-  
-  //   const isDocument = message?.type === "document";;
-  
-  //   let mentionedJid = message.mentionedJid;
-  
-  //   return {
-  //     userJid,
-  //     remoteJid,
-  //     messageText,
-  //     isReply,
-  //     replyJid,
-  //     replyText,
-  //     isAudio,
-  //     isImage,
-  //     isSticker,
-  //     isVideo,
-  //     isDocument,
-  //     mentionedJid,
-  //     message,
-  //   };
-  // };
   
   export const extractCommandAndArgs = (message: string) => {
     if (!message) return { command: "", args: "" };
@@ -216,16 +118,3 @@ import {
   export const onlyNumbers = (text: string) => {
     return text.replace(/[^0-9]/g, "");
   };
-  
-//   export async function getBuffer(url: string) {
-//     const res = await fetch(url, {
-//       headers: { "User-Agent": "okhttp/4.5.0" },
-//       method: "GET",
-//     });
-  
-//     const buff = await res.buffer();
-  
-//     if (buff) return { type: res.headers.get("content-type"), result: buff };
-  
-//     return { type: res.headers.get("content-type"), result: "Error" };
-//   }
