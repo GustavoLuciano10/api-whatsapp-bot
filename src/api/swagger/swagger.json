@@ -10,11 +10,19 @@
       }
     },
     "host": "localhost:3000",
-    "basePath": "",
+    "basePath": "/api/",
     "tags": [
       {
         "name": "message",
         "description": "Details about send message whatsapp",
+        "externalDocs": {
+          "description": "Find out more",
+          "url": "http://swagger.io"
+        }
+      },
+      {
+        "name": "webhook",
+        "description": "Informations about webhook message",
         "externalDocs": {
           "description": "Find out more",
           "url": "http://swagger.io"
@@ -105,6 +113,46 @@
             }
           ]
         }
+      },
+      "/setWebHook": {
+        "put": {
+          "tags": [
+            "webhook"
+          ],
+          "summary": "Set new weebhook link url",
+          "description": "",
+          "operationId": "setWebHook",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Change webhook link url",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/WebHook"
+              }
+            }
+          ],
+          "responses": {
+            "405": {
+              "description": "Invalid input"
+            }
+          },
+          "security": [
+            {
+              "petstore_auth": [
+                "write:messages",
+                "read:messages"
+              ]
+            }
+          ]
+        }
       }
     },
     "definitions": {
@@ -129,6 +177,14 @@
             "type": "string"
           },
           "base64": {
+            "type": "string"
+          }
+        }
+      },
+      "WebHook": {
+        "type": "object",
+        "properties": {
+          "url": {
             "type": "string"
           }
         }

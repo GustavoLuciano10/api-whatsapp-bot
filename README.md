@@ -26,3 +26,18 @@ npm run dev
 ```
 npm run build
 ```
+
+## REST Services
+The application exposes a few REST endpoints
+
+`HTTP` `PUT` /api/setWebHook
+
+`HTTP` `POST` /api/sendText
+
+`HTTP` `POST` /api/sendImage
+
+
+For more details on route delivery use swagger
+```
+http://localhost:3000/api/docs
+```

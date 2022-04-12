@@ -1,5 +1,6 @@
 import { connect } from "./connection";
 import { getBotData } from "./functions";
+import { jsonReader } from "../api/utils/jsonFunctions"
 
 export default async () => {
     global.socket = await connect();
@@ -10,8 +11,14 @@ export default async () => {
 
         try {
             if(!webMessage.key?.fromMe){
-                //Disparar WebHooks
-                console.log(webMessage);
+                jsonReader("./src/webhook/config.json", (err, config) => {
+                    if (err) {
+                      console.log(err);
+                      return;
+                    }
+                    console.log(config.url);
+                  });
+                // console.log(webMessage);
             }
         } catch (error) {
             console.log(error);
