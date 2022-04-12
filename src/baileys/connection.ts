@@ -1,8 +1,15 @@
 import makeWASocket, { DisconnectReason, useSingleFileAuthState } from "@adiwajshing/baileys";
 import { Boom } from "@hapi/boom";
-import path from 'path'
+import fs = require('fs');
 
 export const connect = async () => {
+    
+    var dir = './src/baileys/cache';
+
+    if (!fs.existsSync(dir)){
+        fs.mkdirSync(dir);
+    }
+
     const {state, saveState} = useSingleFileAuthState(
         './src/baileys/cache/auth_info_multi.json'
     );
