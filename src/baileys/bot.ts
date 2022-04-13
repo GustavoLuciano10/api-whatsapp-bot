@@ -1,6 +1,7 @@
 import { connect } from "./connection";
 import { jsonReader } from "../api/utils/jsonFunctions"
-const axios = require('axios');
+import axios from 'axios';
+import https from 'https'
 
 export default async () => {
     global.socket = await connect();
@@ -15,18 +16,23 @@ export default async () => {
                         console.log(err);
                         return;
                     }
-                    let payload = { 
-                        remoteJid: webMessage.key.remoteJid, 
-                        participant: webMessage.key.participant,
+                    let payload = {
+                        remoteJid: webMessage.key.remoteJid,
+                        participant: webMessage.key.participant || "",
                         pushName: webMessage.pushName,
                         conversation: webMessage.message.conversation
                     };
-                    let res = await axios.post(config.url, payload);
-                    console.log(res.data);
+                    console.log('Try to send payload', config.url, payload)
+                    const agent = new https.Agent({
+                        rejectUnauthorized: false
+                    })
+                    axios.post(config.url, payload, {
+                        httpsAgent: agent
+                    })
                 });
             }
         } catch (error) {
-            console.log(error);
+            console.error('Error while trying to send request', error);
         }
     })
 };
