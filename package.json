@@ -13,12 +13,14 @@
   "author": "Gustavo",
   "license": "ISC",
   "devDependencies": {
+    "@types/axios": "^0.14.0",
     "ts-node-dev": "^1.1.8",
     "typescript": "^4.6.3"
   },
   "dependencies": {
     "@adiwajshing/baileys": "github:adiwajshing/baileys",
     "@hapi/boom": "^9.1.4",
+    "axios": "^0.26.1",
     "express": "^4.17.1",
     "qrcode-terminal": "^0.12.0",
     "swagger-jsdoc": "^6.2.0",
